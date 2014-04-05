@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fname:</b>
+  <%= @user.fname %>
+</p>
+
+<p>
+  <b>Lname:</b>
+  <%= @user.lname %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @user.password %>
+</p>
+
+<p>
+  <b>Usertype:</b>
+  <% if @user.usertype == 0 %>
+      Member
+  <% else %>
+      Admin
+  <% end %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |

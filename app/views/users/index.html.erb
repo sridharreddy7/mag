@@ -1,0 +1,29 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Usertype</th>
+    <th>Email Address</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.fname %></td>
+        <td><%= user.lname %></td>
+        <td><% if user.usertype == 0 %>
+              Member
+            <% else %>
+              Admin</td>
+             <% end %>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Change Membership', edit_user_path(user) %> | </td>
+        <td><%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />

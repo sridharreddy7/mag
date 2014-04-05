@@ -1,0 +1,19 @@
+<h1>Existing user</h1>
+<font color="green"><% if flash[:notice] %><div><%= flash[:notice] %></div><% end %></font>
+<font color="red"><% if flash[:error] %><div><%= flash[:error] %></div><% end %></font>
+<font color="blue"><% if flash[:warning] %><div><%= flash[:warning] %></div><% end %></font>
+
+<%= form_tag :controller => 'users', :action => 'login' do %>
+    <div class="field">
+      <label>Email:</label>
+      <%= text_field_tag(:email) %>
+      <label>Password:</label>
+      <%= password_field_tag(:password) %>
+      <%= submit_tag "Login" %>
+    </div>
+<% end %>
+
+<h1>New user</h1>
+
+<%= render 'form' %>
+

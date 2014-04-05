@@ -1,0 +1,41 @@
+
+<br/><br/>
+
+<h2> Report by posts: </h2>
+        <table border="1">
+          <tr>
+            <th>POST TITLE</th>
+            <th>CREATED BY</th>
+            <th>NUMBER OF VOTES</th>
+          </tr>
+<% @displayarray.each do |key,value| %>
+              <tr>
+       <td  align="center"> <%= "#{key.to_s}" %> </td>
+       <td  align="center"><%= "#{value[1].to_s}" %></td>
+       <td  align="center"> <%= "#{value[0].to_s}"  %> </td>
+              </tr>
+    <% end%>
+        </table>
+
+<br/><br/>
+<h2>Report by users:</h2>
+<table border = "1">
+  <tr>
+    <th>USER NAME</th>
+    <th>NUMBER OF POSTS BY THE USER</th>
+    <th>NUMBER OF COMMENTS BY THE USER</th>
+    <th>TOTAL VOTES FOR THE USER'S POSTS</th>
+  </tr>
+  <% @userarray.each do |key,value| %>
+      <tr>
+        <td align="center"> <%= "#{value[0].to_s}" %> </td>
+        <td align="center"><%= "#{value[1].to_s}" %></td>
+        <td align="center"> <%= "#{value[3].to_s}"  %> </td>
+        <td align="center"> <%= "#{value[2].to_s}"  %> </td>
+      </tr>
+  <% end%>
+
+</table>
+
+
+  <br/>

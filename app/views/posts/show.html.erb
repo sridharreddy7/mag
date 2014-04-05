@@ -1,0 +1,80 @@
+<%
+   def get_vote_str(commentid)
+     votes = Vote.find_all_by_comment_id(commentid)
+     userid = session[:user_logged_in]
+     count = votes.size
+     userpresent = false
+     retstr = ""
+     votes.each do |vote|
+       if vote.user_id == userid
+         userpresent = true
+         break
+       end
+     end
+     if userpresent == true
+       retstr = "You and "<<(count-1).to_s<<" others voted this"
+     else
+       retstr = count.to_s << " people voted this"
+     end
+     retstr
+   end
+%>
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+
+<p>
+  <b></b>
+  <h1><b><%= @post.title.upcase %></b></h1>
+</p>
+         <p>
+              <%= link_to 'vote',votes_path(:postid => @post.id,:id => @post.id, :type => 0),:method=>'post' %>
+              <%= link_to @votestr, votes_url(:type => 0, :postid => @post.id,:id => @post.id), :method=>'get' %>
+         </p>
+
+<p>
+    <b>Category:</b>
+ </p>
+
+<p>
+  <b>Content:</b>
+  <%= @post.content %>
+</p>
+
+<b>COMMENTS</b>  <br/>
+
+<table>
+<% Comment.find(:all).each do |comment| %>
+    <% if comment.post_id == @post.id %>
+       <tr>
+         <td>
+            <b><%= User.find_by_id(comment.user_id).fname  %>   :</b>
+             <%= comment.content %> <br/>
+             <%= link_to 'vote',votes_path(:postid => @post.id,:id => comment.id, :type => 1),:method=>'post' %>
+           (<%= link_to get_vote_str(comment.id), votes_url(:type => 1, :postid => @post.id,:id => comment.id), :method=>'get' %>)
+           <%=
+               if comment.user_id == session[:user_logged_in]
+                    link_to 'Edit', edit_comment_path(:id => comment.id, :postid=>@post.id), :method => 'get'
+               end
+           %>
+           <%=
+               if comment.user_id == session[:user_logged_in]
+                  link_to 'Delete', comment_path(:id => comment.id, :postid=>@post.id), :method => :delete
+               end
+           %>
+         </td>
+         <td>
+         </td>
+       </tr>
+    <% end %>
+<% end %>
+</table>
+
+<% if session[:user_logged_in] != nil %>
+<% @comment = Comment.new
+   @comment.post_id = @post.id
+%>
+
+<%= render :partial => 'comments/form' %>
+
+<% end %>
+
+

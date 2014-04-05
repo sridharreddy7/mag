@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fname: Aswin
+  lname: Parthasarathy
+  email: aakkurr@ncsu.edu
+  password: 
+
+two:
+  fname: swathi
+  lname: shenoy
+  email: sshenoy@ncsu.edu
+  password:
+
+three:
+  fname: indu
+  lname: jaishwal
+  email: ikjaishw@ncsu.edu
+  password:

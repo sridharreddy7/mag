@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BackchannelApplication</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <style type="text/css">
+      body
+      {
+          background:#98AFC7;
+      }
+      #maincontent
+      {
+          margin-left: 10%;
+          margin-top: 5%;
+          margin-right: 10%;
+          background:#FFFFFF;
+      }
+  </style>
+
+</head>
+
+<body>
+
+<div id="maincontent">
+
+<div>
+  <% user_logged = session[:user_logged_in] %>
+  <% if user_logged.nil?  %>
+      <%= form_tag :controller => 'users', :action => 'login' do %>
+          <div class="field">
+            <p></p>
+          </div>
+      <% end %>
+  <% else %>
+      <%= form_tag :controller => 'users', :action => 'logout' do %>
+          <div class="field">
+            <%= submit_tag "Logout" %>
+          </div>
+      <% end %>
+  <% end %>
+</div>
+      <%= form_tag :controller => 'posts', :action => 'search', :method => 'get' do %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= select_tag "search_by", options_for_select([['Content', 1], ['Category', 2],['User',3]], params[:search_by]) %>
+          <%= submit_tag "Search", :name => nil %>
+
+
+<% end %>
+
+
+<%= yield %>
+  <br/><br/>
+  <%= link_to 'Home', :controller => 'users', :action => 'myhome' %>
+</div>
+</body>
+</html>

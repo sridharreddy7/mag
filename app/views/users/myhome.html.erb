@@ -1,0 +1,33 @@
+<%if session[:user_logged_in] == nil %>
+    <script type="text/javascript">
+        window.location.href="/users/new"  // put your correct path in a string here
+    </script>
+<% end%>
+
+<br/>
+<%= link_to 'View all Categories', categories_path %>
+<br/>
+<%= link_to 'View all Posts', posts_path %>
+<br/>
+<%= link_to 'Create new post', new_post_path %>
+<br/>
+
+<%=
+    @user = User.find_by_id(session[:user_logged_in])
+    if (!session[:user_logged_in].nil? and (@user.id == session[:user_logged_in] and User.find_by_id(session[:user_logged_in]).usertype == 1))
+        link_to 'Create New Category', new_category_path
+    end
+%>
+<br/>
+<%=
+    if (!session[:user_logged_in].nil? and (@user.id == session[:user_logged_in] and User.find_by_id(session[:user_logged_in]).usertype == 1))
+      link_to 'View all Users', users_path
+    end
+%>
+
+<br/>
+<%=
+    if (!session[:user_logged_in].nil? and (@user.id == session[:user_logged_in] and User.find_by_id(session[:user_logged_in]).usertype == 1))
+       link_to 'View Reports', :controller => 'users', :action => 'reports'
+    end
+%>
